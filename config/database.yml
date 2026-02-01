@@ -19,9 +19,9 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-
-  # username: <%= ENV['DATABASE_USER'] %>
-  # password: <%= ENV['DATABASE_PASSWORD'] %>
+  host: <%= ENV['DATABASE_HOST'] || 'localhost' %>
+  username: <%= ENV['DATABASE_USER'] || 'postgres' %>
+  password: <%= ENV['DATABASE_PASSWORD'] || 'postgres' %>
 
 development:
   <<: *default
@@ -86,19 +86,19 @@ test:
 production:
   primary:
     adapter: postgresql
-    url: <%= ENV.fetch("DATABASE_URL") %>
+    url: <%= ENV["DATABASE_URL"] || "postgresql://#{ENV['DATABASE_USER'] || 'postgres'}:#{ENV['DATABASE_PASSWORD'] || 'postgres'}@#{ENV['DATABASE_HOST'] || 'localhost'}:5432/test_app_production" %>
 
   cache:
     adapter: postgresql
-    url: <%= ENV.fetch("DATABASE_URL") %>
+    url: <%= ENV["DATABASE_URL"] || "postgresql://#{ENV['DATABASE_USER'] || 'postgres'}:#{ENV['DATABASE_PASSWORD'] || 'postgres'}@#{ENV['DATABASE_HOST'] || 'localhost'}:5432/test_app_production" %>
     migrations_paths: db/cache_migrate
 
   queue:
     adapter: postgresql
-    url: <%= ENV.fetch("DATABASE_URL") %>
+    url: <%= ENV["DATABASE_URL"] || "postgresql://#{ENV['DATABASE_USER'] || 'postgres'}:#{ENV['DATABASE_PASSWORD'] || 'postgres'}@#{ENV['DATABASE_HOST'] || 'localhost'}:5432/test_app_production" %>
     migrations_paths: db/queue_migrate
 
   cable:
     adapter: postgresql
-    url: <%= ENV.fetch("DATABASE_URL") %>
+    url: <%= ENV["DATABASE_URL"] || "postgresql://#{ENV['DATABASE_USER'] || 'postgres'}:#{ENV['DATABASE_PASSWORD'] || 'postgres'}@#{ENV['DATABASE_HOST'] || 'localhost'}:5432/test_app_production" %>
     migrations_paths: db/cable_migrate
