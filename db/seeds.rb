@@ -7,3 +7,11 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+Book.create!([
+    {title: "The Great Gatsby"},
+    {title: "To Kill a Mockingbird"},
+    {title: "1984"},
+    {title: "Pride and Prejudice"},
+    {title: "The Catcher in the Rye"}
+])
