@@ -85,20 +85,21 @@ test:
 
 production:
   primary:
-    adapter: postgresql
-    url: <%= ENV["DATABASE_URL"] || "postgresql://#{ENV['DATABASE_USER'] || 'postgres'}:#{ENV['DATABASE_PASSWORD'] || 'postgres'}@#{ENV['DATABASE_HOST'] || 'localhost'}:5432/test_app_production" %>
+    <<: *default
+    database: test_app_production
+    url: <%= ENV["DATABASE_URL"] %>
 
   cache:
-    adapter: postgresql
-    url: <%= ENV["DATABASE_URL"] || "postgresql://#{ENV['DATABASE_USER'] || 'postgres'}:#{ENV['DATABASE_PASSWORD'] || 'postgres'}@#{ENV['DATABASE_HOST'] || 'localhost'}:5432/test_app_production" %>
+    <<: *default
+    database: test_app_production
     migrations_paths: db/cache_migrate
 
   queue:
-    adapter: postgresql
-    url: <%= ENV["DATABASE_URL"] || "postgresql://#{ENV['DATABASE_USER'] || 'postgres'}:#{ENV['DATABASE_PASSWORD'] || 'postgres'}@#{ENV['DATABASE_HOST'] || 'localhost'}:5432/test_app_production" %>
+    <<: *default
+    database: test_app_production
     migrations_paths: db/queue_migrate
 
   cable:
-    adapter: postgresql
-    url: <%= ENV["DATABASE_URL"] || "postgresql://#{ENV['DATABASE_USER'] || 'postgres'}:#{ENV['DATABASE_PASSWORD'] || 'postgres'}@#{ENV['DATABASE_HOST'] || 'localhost'}:5432/test_app_production" %>
+    <<: *default
+    database: test_app_production
     migrations_paths: db/cable_migrate
